@@ -2,7 +2,7 @@
 
 ### 1.1 集群(cluster)
 
-拥有同一个集群名称(`cluste.name`)的ES实例(节点)的集合。
+拥有同一个集群名称(`cluster.name`)的ES实例(节点)的集合。
 
 ### 1.2 索引(index)
 
