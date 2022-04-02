@@ -31,7 +31,7 @@ public class DashGatewayApplication {
 
 除了这种修改方式，还可以通过`spring-factories`文件方式进行注入：
 
-![spring-factories文件](_media/springboot/spring-factories-location.png)
+![spring-factories文件](../_media/springboot/spring-factories-location.png)
 
 ```
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
