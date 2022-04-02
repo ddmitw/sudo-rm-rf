@@ -44,3 +44,4 @@
 
 3.[分布式之缓存击穿](https://www.cnblogs.com/rjzheng/p/8908073.html)；
 
+## 2.RedisTemplate和StringRedisTemplate用法区别？

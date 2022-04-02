@@ -124,3 +124,13 @@ git reset --hard <commit>
 ## 5.如何撤销Git操作？
 
 https://www.ddmit.com/2019/12/25/git-undo/ ;
+
+
+
+## 6.Merging vs. Rebasing
+
+
+
+// TO-BE-CONTINUED
+
+参考：[Merging vs. Rebasing](https://www.atlassian.com/git/tutorials/merging-vs-rebasing)；

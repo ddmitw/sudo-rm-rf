@@ -257,6 +257,16 @@ class Santana implements Car {
 
 ### 1.9 成员变量和方法作用域
 
+### 1.10 Java中的显式类型转换和隐式类型转换？
+
+https://blog.csdn.net/s10461/article/details/53941091
+
+https://juejin.cn/post/6844903917835419661
+
+### 1.11 Java 中 java.lang.Void 和 void 有什么作用和区别？
+
+
+
 
 ## 2.集合
 
