@@ -638,6 +638,14 @@ public class HumanController {
 * `@Autowired`默认按照byType方式进行bean匹配，`@Resource`默认按照byName方式进行bean匹配。
 * `@Autowired`默认情况下必须要求依赖对象必须存在，如果要允许null值，可以设置它的required属性为false，如：`@Autowired(required=false`)。
 
+
+
+### 11.9  @ConditionalOnProperty注解使用
+
+https://jishu.dev/2022/01/05/spring-conditionalonproperty/
+
+
+
 ## 12. Spring对多线程的支持
 
 ## 13. Spring对定时任务的支持
