@@ -71,3 +71,27 @@ spring:
 1） [application.yml与bootstrap.yml的区别？](https://www.cnblogs.com/cy0628/p/15193872.html)
 
 2）[What is the difference between putting a property on application.yml or bootstrap.yml in spring boot?](https://stackoverflow.com/questions/32997352/what-is-the-difference-between-putting-a-property-on-application-yml-or-bootstra)
+
+## 3.配置文件不同位置的优先级？
+
+配置文件结构图：
+
+![配置文件结构图](../_media/springboot/spring-config-file-location.png)
+
+
+
+如果在不同的目录中存在多个配置文件，它的读取顺序是：
+
+```
+1.config/application.properties（项目根目录中config目录下）
+2.config/application.yml
+3.application.properties（项目根目录下）
+4.application.yml
+5.resources/config/application.properties（项目resources目录中config目录下）
+6.resources/config/application.yml
+7.resources/application.properties（项目的resources目录下）
+8.resources/application.yml
+```
+
+
+
