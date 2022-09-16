@@ -214,6 +214,10 @@ class Santana implements Car {
 
 方法的重载和重写都是实现多态的方式，区别在于前者实现的是编译时的多态性，而后者实现的是运行时的多态性。重写要求子类被重写方法与父类被重写方法有相同的返回类型，重载对返回类型没有特殊的要求。
 
+
+
+> 摘自有效Java编程：总而言之，方法可以重载，但并不意味着就应该这样做。通常，最好避免重载具有相同数量参数的多个签名的方法。在某些情况下，特别是涉及构造函数的情况下，可能难以遵循这个建议。在这些情况下，你至少应该避免同一组参数只需经过类型转换就可以被传递给不同的重载方法。如果这是无法避免的，例如，因为要对现有类进行改造以实现新接口，那么应该确保在传递相同的参数时，所有重载的行为都是相同的。如果你做不到这一点，程序员将很难有效地使用重载方法或构造函数，他们将无法理解为什么它不能工作。
+
 **补充：** 
 
 重写和重载的语法：
@@ -227,7 +231,96 @@ class Santana implements Car {
 重载是类中(含父子类型) 方法名一样，功能类似，参数不同的方法，语法:   
 1)方法名一样, 参数列表不同的方法；  
 2)目的是使API的设计更加优雅；   
-3)根据方法名和参数的类型调用对应的方法；    
+3)根据方法名和参数的类型调用对应的方法；   
+
+对于编译时的多态性和运行时的多态性的理解，可以参考下面两段代码：
+
+**片段1**
+
+```java
+
+import java.math.BigInteger;
+import java.util.*;
+
+public class CollectionClassifier {
+    public static String classify(Set<?> s) {
+        return "Set";
+    }
+
+    public static String classify(List<?> lst) {
+        return "List";
+    }
+
+    public static String classify(Collection<?> c) {
+        return "Unknown Collection";
+    }
+
+    public static void main(String[] args) {
+        Collection<?>[] collections = {
+                new HashSet<String>(), new ArrayList<BigInteger>(), new HashMap<String, String>().values()
+        };
+        for (Collection<?> c : collections)
+            System.out.println(classify(c));
+    }
+}
+```
+
+ 上面代码的输出并不是你预期的`SET`、`List`、`Unknown Collection`，而是：
+
+```
+Unknown Collection
+Unknown Collection
+Unknown Collection
+```
+
+**片段2**
+
+```java
+
+import java.util.Arrays;
+import java.util.List;
+
+class Wine {
+    String name() {
+        return "wine";
+    }
+}
+
+class SparklingWine extends Wine {
+    @Override
+    String name() {
+        return "sparkling wine";
+    }
+}
+
+class Champagne extends SparklingWine {
+    @Override
+    String name() {
+        return "champagne";
+    }
+}
+
+public class Overriding {
+    public static void main(String[] args) {
+        List<Wine> wineList = Arrays.asList(new Wine(), new SparklingWine(), new Champagne());
+        for (Wine wine : wineList)
+            System.out.println(wine.name());
+    }
+}
+
+```
+
+片段2的输出：
+
+```
+wine
+sparkling wine
+champagne
+```
+
+片段1没有你期待的输出的原因是classify 方法被重载，在编译时类型是相同的`Collection<?>`；片段2中name 方法在 Wine 类中声明，并在 SparklingWine 和 Champagne 子类中重写。对象的编译时类型对调用覆盖方法时执行的方法没有影响。
+
+
 
 ### 1.5 Java的继承与实现
 

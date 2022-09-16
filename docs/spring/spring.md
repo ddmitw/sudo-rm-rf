@@ -378,7 +378,7 @@ public @interface Override {
 
 这里面的 `@Target` `、@Retention` 就是元注解。
 
-元注解有六个：
+**元注解有六个：**
 
 * `@Target`：表示该注解可以用于什么地方，用于指定被修饰的注解修饰哪些程序单元，比如类，方法，字段。
 * `@Retention`：表示在什么级别保存该注解信息，用于指定被修饰的注解被保留多长时间，分别是 `SOURCE`（注解仅存在于源码中，在class字节码文件中不包含）、`CLASS`（默认的保留策略，注解会在class字节码文件中存在，但运行时无法获取）、`RUNTIME`（注解会在class字节码文件中存在，在运行时可以通过反射获取到）三种类型；如果想要在程序运行过程中通过反射来获取注解的信息需要将Retention设置为RUNTIME。
@@ -386,6 +386,36 @@ public @interface Override {
 * `@Inherited`：允许子类继承父类中的注解，用于指定被修饰的注解类将具有继承性。
 * `@Repeatable`：1.8新增，允许一个注解在一个元素上使用多次。
 * `@Native`：1.8新增，修饰成员变量，表示这个变量可以被本地代码引用，常常被代码生成工具使用。
+
+**ElementType 各常量定义的范围：**
+
+- ElementType.TYPE
+  - Class, interface (including annotation type), or enum declaration（类、接口、注解、枚举）
+- ElementType.FIELD
+  - Field declaration (includes enum constants)（字段、枚举常量）
+- ElementType.METHOD
+  - Method declaration（方法）
+- ElementType.PARAMETER
+  - Formal parameter declaration（方法参数）
+- ElementType.CONSTRUCTOR
+  - Constructor declaration（构造）
+- ElementType.LOCAL_VARIABLE
+  - Local variable declaration（局部变量）
+- ElementType.ANNOTATION_TYPE
+  - Annotation type declaration（注解）
+- ElementType.PACKAGE
+  - Package declaration（包）
+- ElementType.TYPE_PARAMETER
+  - Type parameter declaration（泛型参数）
+  - Since: 1.8
+- ElementType.TYPE_USE
+  - Use of a type（任意类型，获取 class 对象和 import 两种情况除外）
+  - Since: 1.8
+- ElementType.MODULE
+  - Module declaration（[模块](https://docs.oracle.com/javase/9/whatsnew/toc.htm#JSNEW-GUID-C23AFD78-C777-460B-8ACE-58BE5EA681F6)）
+  - Since: 9
+
+
 
 ### 11.2 自定义注解
 

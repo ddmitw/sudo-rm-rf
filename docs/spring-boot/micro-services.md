@@ -2,7 +2,7 @@
 
 场景：在多模块项目的开发中，其中一个模块，想通过`@Autowired`注入其他模块的依赖，但是会提示注入失败。
 
-### 解决办法
+### 1.1 解决办法
 
 **方式一**
 
@@ -38,7 +38,7 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
   com.ddmit.common.security.service.TokenService
 ```
 
-### 原因
+### 1.2 原因
 
 无法注入的原因是：`@ComponentScan`注解默认的扫描范围是当前类所在包及其子包，多模块不在扫描范围内。
 
