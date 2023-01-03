@@ -75,3 +75,63 @@ pom.xml
 - `pom` ：父类型都为pom类型；
 - `jar `： 内部调用或者是作服务使用；
 - `war `： 需要部署的项目；
+
+
+
+## 3.Maven中`<scope>import</scope>` 和 `<type>pom</type>`的用法？
+
+这两个标签用于标记`<dependency>`的作用范围和类型。
+
+**用法1**
+
+在分模块的项目中，父级模块pom中的`dependencyManagement` 标签中需要导入另一个pom中的`dependencyManagement`的时候，必须同时使用`<scope>import</scope> `和 `<type>pom</type>`。
+
+```xml
+    <!-- 依赖声明 -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringCloud 微服务 -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+```
+
+在上面的pom中，父级pom，负责管理依赖的版本，其中父级pom想引入`spring-cloud-dependencies`的pom，从而能把spring-cloud的所以依赖引入进来。`spring-cloud-dependencies`也是一个父级pom，通过`dependencyManagement`管理了一系列依赖。这种情形就必须同时使用`<scope>import</scope> `和 `<type>pom</type>`。
+
+ 这个时候，该pom中`dependencyManagement`就会包含导入的`spring-boot-dependencies`中的所有`dependencyManagement`。
+
+这是为了解决pom类型的父工程单继承的问题，通过导入，可以导入各种其他父工程的`dependencyManagement`
+
+*注意*：`dependencyManagement`只在父工程（即pom类型的maven工程）中声明，在子工程中定义无需声明版本从而生效。如果在jar类型的maven工程中添加了`dependencyManagement`，是没有意义的。
+
+
+
+**用法2**
+
+在一个子模块中，当需要把一些依赖定义到一个pom工程中，但由于maven单继承机制，该模块又想通过依赖引入该pom工程中的所有依赖，只需要添加`<type>pom</type>`。
+
+```xml
+<dependencies>
+　　<dependency>
+　　　<groupId>org.sonatype.mavenbook</groupId>  　　　  
+	  <artifactId>persistence-deps</artifactId>  　　　  
+	  <version>1.0</version>
+　　　<type>pom</type>
+　　</dependency> 
+</dependencies>
+```
+
+这是为了解决子工程单继承的问题，通过`<type>pom</type>`可以依赖于其他的pom父工程，从而将pom工程中的依赖都传递过来
+
+type 默认是jar，依赖jar工程时可以不写type标签，所以如果依赖于一个jar工程，而jar工程中包含大量的依赖，也会一起传递过来，这也就是maven依赖传递的原理。
+
+参考：
+
+1. [Maven中import pom用法](https://www.cnblogs.com/cainiao-Shun666/p/15822262.html)
+2. [Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Scope) ；
