@@ -33,9 +33,9 @@ https://www.cnblogs.com/anker/p/6056540.html ；
 正向代理的使用，就是你指定什么地址，代理服务器就将这个地址交给目标服务器。
 
 ```
-location / {  
-    root   /usr/local/html;    
-    index  index.html index.htm;  
+location / {
+    root /usr/local/html;
+    index index.html index.htm;
 }
 ```
 

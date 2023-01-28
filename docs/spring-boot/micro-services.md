@@ -58,14 +58,14 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 
 * `@SpringBootConfiguration`继承自`@Configuration`，二者功能也一致，标注当前类是配置类，
   并会将当前类内声明的一个或多个以`@Bean`注解标记的方法的实例纳入到spring容器中，并且实例名就是该方法的方法名。`@SpringBootConfiguration` 可以作为 Spring 标准中`@Configuration` 注解的替代。
-* `@EnableAutoConfiguration` 注解表示开启自动配置功能，该注解是 Spring Boot 框架最重要的注解，也是实现自动化配置的注解。通常建议将 `@EnableAutoConfiguration`（如果您未使用 `@SpringBootApplication`）放在根包中，以便可以搜索所有子包和类。`@EnableAutoConfiguration`可以帮助Spring Boot应用将所有符合条件的`@Configuration`配置都加载到当前Spring Boot创建并使用的IoC容器。
+* `@EnableAutoConfiguration`注解表示开启自动配置功能，该注解是Spring Boot框架最重要的注解，也是实现自动化配置的注解。通常建议将`@EnableAutoConfiguration`（如果您未使用`@SpringBootApplication`）放在根包中，以便可以搜索所有子包和类。`@EnableAutoConfiguration`可以帮助Spring Boot应用将所有符合条件的`@Configuration`配置都加载到当前Spring Boot创建并使用的IoC容器。
 * `@ComponentScan`注解的作用主要是定义扫描的包路径，然后从中找出标识了需要装配的类自动装配到Spring的Bean容器。默认扫描范围为：所在包及其子包。
 
 参考：
 
 1）[@springBootApplication的默认扫描范围](https://blog.csdn.net/swansonge/article/details/106259937)；
 
-2）[@ComponentScan 注解（1）](https://www.hxstrive.com/subject/spring_boot.htm?id=327);
+2）[@ComponentScan注解（1）](https://www.hxstrive.com/subject/spring_boot.htm?id=327)；
 
 ## 3.spring-factories文件的加载时机
 
@@ -76,7 +76,6 @@ org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
 `spring-core`包里定义了`SpringFactoriesLoader`类，这个类实现了检索`META-INF/spring.factories`文件，并获取指定接口的配置的功能。在这个类中定义了两个对外的方法：
 
 * `loadFactories`：根据接口类获取其实现类的实例，这个方法返回的是对象列表。
-
 * `loadFactoryNames`：根据接口获取其接口类的名称，这个方法返回的是类名的列表。
 
 上面的两个方法的关键都是从指定的`ClassLoader`中获取`spring.factories`文件，并解析得到类名列表，具体代码如下：
@@ -219,7 +218,5 @@ public final class SpringFactoriesLoader {
 在日常工作中，我们可能需要实现一些SDK或者Spring Boot Starter给被人使用，这个时候我们就可以使用Factories机制。Factories机制可以让SDK或者Starter的使用者需要很少或者不需要进行配置，只需要在服务中引入我们的jar包。
 
 
-
 1）[推荐阅读-spring.factories](https://www.cnblogs.com/itplay/p/9927892.html)
-
 2）[spring-factories文件的加载时机](https://www.jianshu.com/p/54e80439dd0e)；

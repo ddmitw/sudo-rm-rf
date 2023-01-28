@@ -1,12 +1,12 @@
-## 1. 什么是 Spring 框架?
+## 1. 什么是Spring框架?
 
-Spring 是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。
+Spring是一种轻量级开发框架，旨在提高开发人员的开发效率以及系统的可维护性。
 
-Spring 官网：[https://spring.io/](https://spring.io/)。
+Spring官网：[https://spring.io/](https://spring.io/)。
 
-我们一般说 Spring 框架指的都是 Spring Framework，它是很多模块的集合，使用这些模块可以很方便地协助我们进行开发。这些模块是：核心容器、数据访问/集成,、Web、AOP（面向切面编程）、工具、消息和测试模块。比如：Core Container 中的 Core 组件是Spring 所有组件的核心，Beans 组件和 Context 组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。
+我们一般说Spring框架指的都是Spring Framework，它是很多模块的集合，使用这些模块可以很方便地协助我们进行开发。这些模块是：核心容器(Core Container)、数据访问/集成(Data Access/Integration)、Web、AOP（面向切面编程）、Aspects、工具、消息和测试模块。比如：Core Container中的Core组件是Spring所有组件的核心，Beans组件和Context组件是实现IOC和依赖注入的基础，AOP组件用来实现面向切面编程。
 
-Spring 官网列出的 Spring 的 6 个特征:
+Spring官网列出的Spring的6个特征:
 
 - **核心技术** ：依赖注入(DI)，AOP，事件(events)，资源，i18n，验证，数据绑定，类型转换，SpEL。
 - **测试** ：模拟对象，TestContext框架，Spring MVC 测试，WebTestClient。
@@ -17,38 +17,38 @@ Spring 官网列出的 Spring 的 6 个特征:
 
 ## 2. 列举一些重要的Spring模块？
 
-下图对应的是 Spring4.x 版本。目前最新的5.x版本中 Web 模块的 Portlet 组件已经被废弃掉，同时增加了用于异步响应式处理的 WebFlux 组件。
+下图对应的是Spring4.x版本。目前最新的5.x版本中Web模块的Portlet组件已经被废弃掉，同时增加了用于异步响应式处理的WebFlux组件。
 
 ![Spring主要模块](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-6/Spring主要模块.png)
 
-- **Spring Core：** 基础,可以说 Spring 其他所有的功能都需要依赖于该类库。主要提供 IoC 依赖注入功能。
-- **Spring  Aspects** ： 该模块为与AspectJ的集成提供支持。
-- **Spring AOP** ：提供了面向切面的编程实现。
-- **Spring JDBC** : Java数据库连接。
-- **Spring JMS** ：Java消息服务。
-- **Spring ORM** : 用于支持Hibernate等ORM工具。
-- **Spring Web** : 为创建Web应用程序提供支持。
-- **Spring Test** : 提供了对 JUnit 和 TestNG 测试的支持。
+- **Spring Core：** 基础,可以说Spring其他所有的功能都需要依赖于该类库。主要提供IoC依赖注入功能。
+- **Spring Aspects**： 该模块为与AspectJ的集成提供支持。
+- **Spring AOP**：提供了面向切面的编程实现。
+- **Spring JDBC**: Java数据库连接。
+- **Spring JMS**：Java消息服务。
+- **Spring ORM**: 用于支持Hibernate等ORM工具。
+- **Spring Web**: 为创建Web应用程序提供支持。
+- **Spring Test**: 提供了对JUnit和TestNG测试的支持。
 
 ## 3. @RestController vs @Controller
 
 **`Controller` 返回一个页面**
 
-单独使用 `@Controller` 不加 `@ResponseBody`的话一般使用在要返回一个视图的情况，这种情况属于比较传统的Spring MVC 的应用，对应于前后端不分离的情况。
+单独使用`@Controller`不加`@ResponseBody`的话一般使用在要返回一个视图的情况，这种情况属于比较传统的Spring MVC 的应用，对应于前后端不分离的情况。
 
 ![SpringMVC 传统工作流程](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/SpringMVC传统工作流程.png)
 
-**`@RestController` 返回JSON 或 XML 形式数据**
+**`@RestController` 返回JSON或XML形式数据**
 
-但 `@RestController`只返回对象，对象数据直接以 JSON 或 XML 形式写入 HTTP 响应(Response)中，这种情况属于 RESTful Web服务，这也是目前日常开发所接触的最常用的情况（前后端分离）。
+但`@RestController`只返回对象，对象数据直接以JSON或XML形式写入HTTP响应(Response)中，这种情况属于RESTful Web服务，这也是目前日常开发所接触的最常用的情况（前后端分离）。
 
 ![SpringMVC+RestController](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/SpringMVCRestController.png)
 
-**`@Controller +@ResponseBody` 返回JSON 或 XML 形式数据**
+**`@Controller+@ResponseBody`返回JSON或 XML形式数据**
 
-如果你需要在Spring4之前开发 RESTful Web服务的话，你需要使用 `@Controller` 并结合 `@ResponseBody`注解，也就是说 `@Controller` +`@ResponseBody`= `@RestController`（Spring 4 之后新加的注解）。
+如果你需要在Spring4之前开发RESTful Web服务的话，你需要使用`@Controller`并结合`@ResponseBody`注解，也就是说`@Controller`+`@ResponseBody`= `@RestController`（Spring 4 之后新加的注解）。
 
-> `@ResponseBody` 注解的作用是将 `Controller` 的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到HTTP 响应(Response)对象的 body 中，通常用来返回 JSON 或者 XML 数据，返回 JSON 数据的情况比较多。
+> `@ResponseBody`注解的作用是将`Controller`的方法返回的对象通过适当的转换器转换为指定的格式之后，写入到HTTP响应(Response)对象的 body中，通常用来返回JSON或者XML数据，返回JSON数据的情况比较多。
 
 ![Spring3.xMVC RESTfulWeb服务工作流程](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/Spring3.xMVCRESTfulWeb服务工作流程.png)
 
@@ -59,30 +59,30 @@ Reference:
 
 ## 4. Spring bean
 
-### 4.1 Spring 中的 bean 的作用域有哪些?
+### 4.1 Spring中的bean的作用域有哪些？
 
-- singleton : 唯一 bean 实例，Spring 中的 bean 默认都是单例的。
-- prototype : 每次请求都会创建一个新的 bean 实例。
-- request : 每一次HTTP请求都会产生一个新的bean，该bean仅在当前HTTP request内有效。
-- session : 每一次HTTP请求都会产生一个新的 bean，该bean仅在当前 HTTP session 内有效。
-- global-session： 全局session作用域，仅仅在基于portlet的web应用中才有意义，Spring5已经没有了。Portlet是能够生成语义代码(例如：HTML)片段的小型Java Web插件。它们基于portlet容器，可以像servlet一样处理HTTP请求。但是，与 servlet 不同，每个 portlet 都有不同的会话
+- singleton: 唯一bean实例，Spring中的bean默认都是单例的。
+- prototype: 每次请求都会创建一个新的bean实例。
+- request: 每一次HTTP请求都会产生一个新的bean，该bean仅在当前HTTP request内有效。
+- session: 每一次HTTP请求都会产生一个新的bean，该bean仅在当前HTTP session内有效。
+- global-session: 全局session作用域，仅仅在基于portlet的web应用中才有意义，Spring5已经没有了。Portlet是能够生成语义代码(例如：HTML)片段的小型Java Web插件。它们基于portlet容器，可以像servlet一样处理HTTP请求。但是，与servlet不同，每个portlet 都有不同的会话。
 
-### 4.2 Spring 中的单例 bean 的线程安全问题了解吗？
+### 4.2 Spring中的单例bean的线程安全问题了解吗？
 
-的确是存在安全问题的。因为，当多个线程操作同一个对象的时候，对这个对象的成员变量的写操作会存在线程安全问题。
+的确是存在安全问题的。因为当多个线程操作同一个对象的时候，对这个对象的成员变量的写操作会存在线程安全问题。
 
-但是，一般情况下，我们常用的 `Controller`、`Service`、`Dao` 这些 Bean 是无状态的。无状态的 Bean 不能保存数据，因此是线程安全的。
+但是一般情况下，我们常用的`Controller`、`Service`、`Dao`这些Bean是无状态的。无状态的Bean不能保存数据，因此是线程安全的。
 
-常见的有 2 种解决办法：
+常见的有2种解决办法：
 
-1. 在类中定义一个 `ThreadLocal` 成员变量，将需要的可变成员变量保存在  `ThreadLocal`  中（推荐的一种方式）。
-2. 改变 Bean 的作用域为 “prototype”：每次请求都会创建一个新的 bean 实例，自然不会存在线程安全问题。
+1. 在类中定义一个`ThreadLocal`成员变量，将需要的可变成员变量保存在`ThreadLocal`中（推荐的一种方式）。
+2. 改变Bean的作用域为“prototype”：每次请求都会创建一个新的bean实例，自然不会存在线程安全问题。
 
-### 4.3 @Component 和 @Bean 的区别是什么？
+### 4.3 @Component和@Bean的区别是什么？
 
-1. 作用对象不同: `@Component` 注解作用于类，而 `@Bean`注解作用于方法。
-2. `@Component`通常是通过类路径扫描来自动侦测以及自动装配到Spring容器中（我们可以使用 `@ComponentScan` 注解定义要扫描的路径从中找出标识了需要装配的类自动装配到 Spring 的 bean 容器中）。`@Bean` 注解通常是我们在标有该注解的方法中定义产生这个 bean,`@Bean`告诉了Spring这是某个类的示例，当我需要用它的时候还给我。
-3. `@Bean` 注解比 `Component` 注解的自定义性更强，而且很多地方我们只能通过 `@Bean` 注解来注册bean。比如当我们引用第三方库中的类需要装配到 `Spring`容器时，则只能通过 `@Bean`来实现。
+1. 作用对象不同: `@Component`注解作用于类，而`@Bean`注解作用于方法。
+2. `@Component`通常是通过类路径扫描来自动侦测以及自动装配到Spring容器中（我们可以使用`@ComponentScan`注解定义要扫描的路径从中找出标识了需要装配的类自动装配到Spring的bean容器中）。`@Bean` 注解通常是我们在标有该注解的方法中定义产生这个bean,`@Bean`告诉了Spring这是某个类的示例，当我需要用它的时候还给我。
+3. `@Bean`注解比`Component`注解的自定义性更强，而且很多地方我们只能通过`@Bean` 注解来注册bean。比如当我们引用第三方库中的类需要装配到`Spring`容器时，则只能通过`@Bean`来实现。
 
 `@Bean`注解使用示例：
 
@@ -105,7 +105,7 @@ public class AppConfig {
 </beans>
 ```
 
-下面这个例子是通过 `@Component` 无法实现的。
+下面这个例子是通过`@Component`无法实现的。
 
 ```java
 @Bean
@@ -121,31 +121,31 @@ public OneService getService(status) {
 }
 ```
 
-### 4.4 将一个类声明为Spring的 bean 的注解有哪些?
+### 4.4 将一个类声明为Spring的bean的注解有哪些？
 
-我们一般使用 `@Autowired` 注解自动装配 bean，要想把类标识成可用于 `@Autowired` 注解自动装配的 bean 的类,采用以下注解可实现：
+我们一般使用`@Autowired`注解自动装配bean，要想把类标识成可用于`@Autowired`注解自动装配的bean的类，采用以下注解可实现：
 
-- `@Component` ：通用的注解，可标注任意类为 `Spring` 组件。如果一个Bean不知道属于哪个层，可以使用 `@Component` 注解标注。
-- `@Repository` : 对应持久层即 Dao 层，主要用于数据库相关操作。
-- `@Service` : 对应服务层，主要涉及一些复杂的逻辑，需要用到 Dao层。
-- `@Controller` : 对应 Spring MVC 控制层，主要用于接受用户请求并调用 Service 层返回数据给前端页面。
+- `@Component` ：通用的注解，可标注任意类为`Spring`组件。如果一个Bean不知道属于哪个层，可以使用`@Component`注解标注。
+- `@Repository` : 对应持久层即Dao层，主要用于数据库相关操作。
+- `@Service` : 对应服务层，主要涉及一些复杂的逻辑，需要用到Dao层。
+- `@Controller` : 对应Spring MVC控制层，主要用于接受用户请求并调用Service层返回数据给前端页面。
 
-### 4.5 Spring 中的 bean 生命周期?
+### 4.5 Spring中的bean生命周期？
 
 这部分网上有很多文章都讲到了，下面的内容整理自： ~~https://yemengying.com/2016/07/14/spring-bean-life-cycle/~~ (原作者可能不再维护这个博客，连接无法访问，可通过其 Github 仓库访问 [https://github.com/giraffe0813/giraffe0813.github.io](https://github.com/giraffe0813/giraffe0813.github.io)) ，除了这篇文章，再推荐一篇很不错的文章 ：[https://www.cnblogs.com/zrtqsk/p/3735273.html](https://www.cnblogs.com/zrtqsk/p/3735273.html) 。
 
-- Bean 容器找到配置文件中 Spring Bean 的定义。
-- Bean 容器利用 Java Reflection API 创建一个Bean的实例。
-- 如果涉及到一些属性值 利用 `set()`方法设置一些属性值。
-- 如果 Bean 实现了 `BeanNameAware` 接口，调用 `setBeanName()`方法，传入Bean的名字。
-- 如果 Bean 实现了 `BeanClassLoaderAware` 接口，调用 `setBeanClassLoader()`方法，传入 `ClassLoader`对象的实例。
-- 与上面的类似，如果实现了其他 `*.Aware`接口，就调用相应的方法。
-- 如果有和加载这个 Bean 的 Spring 容器相关的 `BeanPostProcessor` 对象，执行 `postProcessBeforeInitialization()` 方法
-- 如果Bean实现了 `InitializingBean`接口，执行 `afterPropertiesSet()`方法。
-- 如果 Bean 在配置文件中的定义包含  init-method 属性，执行指定的方法。
-- 如果有和加载这个 Bean的 Spring 容器相关的 `BeanPostProcessor` 对象，执行 `postProcessAfterInitialization()` 方法
-- 当要销毁 Bean 的时候，如果 Bean 实现了 `DisposableBean` 接口，执行 `destroy()` 方法。
-- 当要销毁 Bean 的时候，如果 Bean 在配置文件中的定义包含 destroy-method 属性，执行指定的方法。
+- Bean容器找到配置文件中Spring Bean的定义。
+- Bean容器利用Java Reflection API创建一个Bean的实例。
+- 如果涉及到一些属性值利用`set()`方法设置一些属性值。
+- 如果Bean实现了`BeanNameAware`接口，调用`setBeanName()`方法，传入Bean的名字。
+- 如果Bean实现了`BeanClassLoaderAware`接口，调用`setBeanClassLoader()`方法，传入`ClassLoader`对象的实例。
+- 与上面的类似，如果实现了其他`*.Aware`接口，就调用相应的方法。
+- 如果有和加载这个Bean的Spring容器相关的`BeanPostProcessor`对象，执行`postProcessBeforeInitialization()`方法
+- 如果Bean实现了`InitializingBean`接口，执行`afterPropertiesSet()`方法。
+- 如果Bean在配置文件中的定义包含`init-method`属性，执行指定的方法。
+- 如果有和加载这个Bean的Spring容器相关的`BeanPostProcessor`对象，执行`postProcessAfterInitialization()`方法。
+- 当要销毁Bean的时候，如果Bean实现了`DisposableBean`接口，执行`destroy()`方法。
+- 当要销毁Bean的时候，如果Bean在配置文件中的定义包含`destroy-method`属性，执行指定的方法。
 
 图示：
 
@@ -163,21 +163,21 @@ Spring AOP部分的学习大致涉及的内容：
 
 ### 5.1 什么是Spring AOP及对AOP的理解？
 
-AOP的全称是面向切面编程(Aspect-Oriented Programming)， Aspect是一种新的模块化机制，用来描述分散在对象、类或函数中的横切关注点（crosscutting concern）。从关注点中分离出横切关注点是面向切面的程序设计的核心概念。**分离关注点使解决特定领域问题的代码从业务逻辑中独立出来，业务逻辑的代码中不再含有针对特定领域问题代码的调用，业务逻辑同特定领域问题的关系通过切面来封装、维护**，这样原本分散在整个应用程序中的变动就可以很好地管理起来。
+AOP的全称是面向切面编程(Aspect-Oriented Programming)，Aspect是一种新的模块化机制，用来描述分散在对象、类或函数中的横切关注点(crosscutting concern)。从关注点中分离出横切关注点是面向切面的程序设计的核心概念。**分离关注点使解决特定领域问题的代码从业务逻辑中独立出来，业务逻辑的代码中不再含有针对特定领域问题代码的调用，业务逻辑同特定领域问题的关系通过切面来封装、维护**，这样原本分散在整个应用程序中的变动就可以很好地管理起来。
 
 AOP能够将那些与业务无关，**却为业务模块所共同调用的逻辑或责任（例如事务处理、日志管理、权限控制等）封装起来**，以便**减少系统的重复代码**，**降低模块间的耦合度**，并**有利于未来的可拓展性和可维护性**。
 
-**Spring AOP就是基于动态代理的**，如果要代理的对象，实现了某个接口，那么Spring AOP会使用**JDK Proxy**，去创建代理对象，而对于没有实现接口的对象，就无法使用 JDK Proxy 去进行代理了，这时候Spring AOP会使用**Cglib**生成一个被代理对象的子类来作为代理，如下图所示：
+**Spring AOP就是基于动态代理的**，如果要代理的对象，实现了某个接口，那么Spring AOP会使用**JDK Proxy**，去创建代理对象，而对于没有实现接口的对象，就无法使用JDK Proxy去进行代理了，这时候Spring AOP会使用**Cglib**生成一个被代理对象的子类来作为代理，如下图所示：
 
 ![SpringAOPProcess](_media/spring/SpringAOPProcess.jpg)
 
-当然你也可以使用 AspectJ，Spring AOP 已经集成了AspectJ，AspectJ  应该算的上是 Java 生态系统中最完整的 AOP 框架了。
+当然你也可以使用AspectJ，Spring AOP已经集成了AspectJ，AspectJ应该算的上是Java生态系统中最完整的AOP框架了。
 
-使用 AOP 之后我们可以把一些通用功能抽象出来，在需要用到的地方直接使用即可，这样大大简化了代码量。我们需要增加新功能时也方便，这样也提高了系统扩展性。日志功能、事务管理等等场景都用到了 AOP 。
+使用AOP之后我们可以把一些通用功能抽象出来，在需要用到的地方直接使用即可，这样大大简化了代码量。我们需要增加新功能时也方便，这样也提高了系统扩展性。日志功能、事务管理等等场景都用到了AOP。
 
-AOP 要实现的是在我们原来写的代码的基础上，进行一定的包装，如在方法执行前、方法返回后、方法抛出异常后等地方进行一定的拦截处理或者叫增强处理。
+AOP要实现的是在我们原来写的代码的基础上，进行一定的包装，如在方法执行前、方法返回后、方法抛出异常后等地方进行一定的拦截处理或者叫增强处理。
 
-AOP 的实现并不是因为 Java 提供了什么神奇的钩子，可以把方法的几个生命周期告诉我们，而是我们要实现一个代理，实际运行的实例其实是**生成的代理类的实例**。
+AOP的实现并不是因为Java提供了什么神奇的钩子，可以把方法的几个生命周期告诉我们，而是我们要实现一个代理，实际运行的实例其实是**生成的代理类的实例**。
 
 ### 5.2 Spring AOP相关名词概念解释
 
