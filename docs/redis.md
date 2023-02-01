@@ -58,7 +58,7 @@
 
 ## 3.Redis五大类型？
 
-字符串(String)、哈希/散列/字典(Hash)、列表(List)、集合(Set)、有序集合(sorted set)。
+字符串(String)、哈希/散列/字典(Hash)、列表(List)、集合(Set)、有序集合(Sorted Set)。
 
 参考：
 

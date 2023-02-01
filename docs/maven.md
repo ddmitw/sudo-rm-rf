@@ -69,19 +69,19 @@ pom.xml
 
 除了`<packaging>pom</packaging>`，还有其他两种类型：`jar`和`war`。区别如下：
 
-- `pom` ：父类型都为pom类型；
-- `jar `： 内部调用或者是作服务使用；
-- `war `： 需要部署的项目；
+- `pom`: 父类型都为pom类型；
+- `jar`: 内部调用或者是作服务使用；
+- `war`: 需要部署的项目；
 
 
 
-## 3.Maven中`<scope>import</scope>` 和 `<type>pom</type>`的用法？
+## 3.Maven中`<scope>import</scope>`和`<type>pom</type>`的用法？
 
 这两个标签用于标记`<dependency>`的作用范围和类型。
 
 **用法1**
 
-在分模块的项目中，父级模块pom中的`dependencyManagement` 标签中需要导入另一个pom中的`dependencyManagement`的时候，必须同时使用`<scope>import</scope> `和 `<type>pom</type>`。
+在分模块的项目中，父级模块pom中的`dependencyManagement` 标签中需要导入另一个pom中的`dependencyManagement`的时候，必须同时使用`<scope>import</scope>`和`<type>pom</type>`。
 
 ```xml
     <!-- 依赖声明 -->
