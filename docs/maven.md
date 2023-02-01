@@ -1,15 +1,15 @@
-## 1.Maven 中 dependencyManagement 标签使用？
+## 1.Maven中dependencyManagement标签使用？
 
 在Maven中`dependencyManagement`的作用其实相当于一个对所依赖jar包进行版本管理的管理器，该标签只是对依赖及版本的声明，不会进行实际依赖的下载。
 
 在maven中，获取依赖的版本有两种途径：
 
-* `<dependencyManagement>`下的`<dependencies>` 标签下`<dependency>` 定义的版本；
+* `<dependencyManagement>`下的`<dependencies>`标签下`<dependency>`定义的版本；
 * `<dependencies>`下的`<dependency>` 定义的版本；
 
-如果`<dependencies>`下的`<dependency>`没有声明`version`元素，就会到`<dependencyManagement>`下的`<dependencies>` 标签下`<dependency>` 找有没有对该`artifactId`和`groupId`进行过版本声明，如果有，就继承它，如果没有就会报错，告诉你必须为`dependency`声明一个`version`；
+如果`<dependencies>`下的`<dependency>`没有声明`version`元素，就会到`<dependencyManagement>`下的`<dependencies>`标签下`<dependency>`找有没有对该`artifactId`和`groupId`进行过版本声明，如果有，就继承它，如果没有就会报错，告诉你必须为`dependency`声明一个`version`；
 
-如果`<dependencies>`下的`<dependency>`声明了`version`元素，那么无论`<dependencyManagement>`下的`<dependencies>` 标签下`<dependency>`有没有生命对该`artifactId`和`groupId`的版本声明，都会以`<dependencies>`下的`<dependency>`声明了`version`元素为准。
+如果`<dependencies>`下的`<dependency>`声明了`version`元素，那么无论`<dependencyManagement>`下的`<dependencies>`标签下`<dependency>`有没有生命对该`artifactId`和`groupId`的版本声明，都会以`<dependencies>`下的`<dependency>`声明了`version`元素为准。
 
 使用示例：
 
@@ -35,12 +35,9 @@ pom.xml
 </dependencies>
 ```
 
-
-
 参考：
 
-1）[Maven 中 dependencyManagement 标签使用](https://www.jianshu.com/p/ee15cda51d9d)；
-
+1）[Maven中dependencyManagement 标签使用](https://www.jianshu.com/p/ee15cda51d9d)；
 2）[Maven中的dependencyManagement 意义](https://www.cnblogs.com/mr-wuxiansheng/p/6189438.html)；
 
 
@@ -129,9 +126,84 @@ pom.xml
 
 这是为了解决子工程单继承的问题，通过`<type>pom</type>`可以依赖于其他的pom父工程，从而将pom工程中的依赖都传递过来
 
-type 默认是jar，依赖jar工程时可以不写type标签，所以如果依赖于一个jar工程，而jar工程中包含大量的依赖，也会一起传递过来，这也就是maven依赖传递的原理。
+type默认是jar，依赖jar工程时可以不写type标签，所以如果依赖于一个jar工程，而jar工程中包含大量的依赖，也会一起传递过来，这也就是maven依赖传递的原理。
 
 参考：
 
 1. [Maven中import pom用法](https://www.cnblogs.com/cainiao-Shun666/p/15822262.html)
 2. [Introduction to the Dependency Mechanism](https://maven.apache.org/guides/introduction/introduction-to-dependency-mechanism.html#Dependency_Scope) ；
+
+
+## 4.`pom.xml`中的`maven.compiler.source`和`maven.compiler.target`作用？
+
+`pom.xml`中的`maven.compiler.source`和`maven.compiler.target`是用来指定编译源码和打包的JDK版本的。通常它们的版本等于系统JDK版本，在不能控制客户机的jdk版本的情况下，而想让包的适用性更广的话，可以手动降低版本号，比如如从11降到8。
+
+使用：
+
+```
+  [...]
+  <properties>
+   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  [...]
+
+
+  <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+参考：
+
+1. [Setting the -source and -target of the Java Compiler](https://maven.apache.org/plugins/maven-compiler-plugin/examples/set-compiler-source-and-target.html)。
+
+
+## 5.`pom.xml`中`repositories`及`pluginRepositories`使用？
+
+如果想让某个指定的maven项目，不使用maven的`setting.xml`文件中配置的仓库地址。可以在父级pom.xml文件里通过`repositories`和`pluginRepositories`来指定仓库的远程地址。
+
+```
+   <repositories>
+        <!-- 阿里云仓库 -->
+        <repository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+        </repository>
+
+         <!-- activiti工作流 -->
+        <repository>
+            <id>activiti-releases</id>
+            <url>https://artifacts.alfresco.com/nexus/content/repositories/activiti-releases</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>public</id>
+            <name>aliyun nexus</name>
+            <url>https://maven.aliyun.com/repository/public</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+```
