@@ -15,7 +15,7 @@
 
 ### 2.1 单一职责原则
 
-单一职责原则(Single Responsibility Principle)是指，不要让一个类承担过多的职责。避免职责耦合在一起，避免一个职责的变化影响到其他职责。
+单一职责原则(Single Responsibility Principle)是指不要让一个类承担过多的职责。避免职责耦合在一起，避免一个职责的变化影响到其他职责。
 
 比如在Activity中存在网络请求的逻辑，导致Activity过于臃肿，导致引起这个Activity变化的原因太多，这样就违反了单一职责原则，不利于后续的版本维护。
 

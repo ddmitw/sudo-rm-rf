@@ -32,13 +32,13 @@ Spring官网列出的Spring的6个特征:
 
 ## 3. @RestController vs @Controller
 
-**`Controller` 返回一个页面**
+**`Controller`返回一个页面**
 
 单独使用`@Controller`不加`@ResponseBody`的话一般使用在要返回一个视图的情况，这种情况属于比较传统的Spring MVC 的应用，对应于前后端不分离的情况。
 
 ![SpringMVC 传统工作流程](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-7/SpringMVC传统工作流程.png)
 
-**`@RestController` 返回JSON或XML形式数据**
+**`@RestController`返回JSON或XML形式数据**
 
 但`@RestController`只返回对象，对象数据直接以JSON或XML形式写入HTTP响应(Response)中，这种情况属于RESTful Web服务，这也是目前日常开发所接触的最常用的情况（前后端分离）。
 
@@ -97,7 +97,7 @@ public class AppConfig {
 }
 ```
 
-上面的代码相当于下面的 xml 配置
+上面的代码相当于下面的xml配置
 
 ```xml
 <beans>
@@ -695,11 +695,40 @@ public class HumanController {
 * `@Autowired`默认按照byType方式进行bean匹配，`@Resource`默认按照byName方式进行bean匹配。
 * `@Autowired`默认情况下必须要求依赖对象必须存在，如果要允许null值，可以设置它的required属性为false，如：`@Autowired(required=false`)。
 
-### 11.9  @ConditionalOnProperty注解使用
+### 11.9 @ConditionalOnProperty注解使用
 
 https://jishu.dev/2022/01/05/spring-conditionalonproperty/
 
 
+### 11.10 `@RestControllerAdvice`注解使用
+
+在Spring 3.2中，新增了`@ControllerAdvice`、`@RestControllerAdvice`注解。`@ControllerAdvice`和`@RestControllerAdvice`类似于`@Controller`和`@RestController`，一个是返回对象，一个是返回json数据。
+
+此注解用于定义`@ExceptionHandler`、`@InitBinder`、`@ModelAttribute`，并应用到所有`@RequestMapping`中。
+
+`@RestControllerAdvice`与`@ExceptionHandler`配合使用，用于全局统一异常处理。
+
+```
+@RestControllerAdvice
+public class GlobalExceptionHandler{
+
+    @ExceptionHandler(ServiceException.class)
+    public AjaxResult handleServiceException(ServiceException e, HttpServletRequest request){
+        log.error(e.getMessage(), e);
+        Integer code = e.getCode();
+        return StringUtils.isNotNull(code) ? AjaxResult.error(code, e.getMessage()) : AjaxResult.error(e.getMessage());
+    }
+}
+```
+
+其中：ServiceException是一个自定义异常。
+
+
+参考：
+
+1. [@RestControllerAdvice注解使用](https://www.cnblogs.com/huanshilang/p/10620048.html)；
+2. [RestControllerAdvice注解与全局异常处理](https://juejin.cn/post/7025484367539470344)；
+3. [SpringMvc @InitBinder 表单多对象精准绑定接收](https://blog.csdn.net/xsf1840/article/details/73556633)；
 
 ## 12. Spring对多线程的支持
 

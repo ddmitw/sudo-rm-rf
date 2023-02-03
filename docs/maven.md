@@ -81,7 +81,7 @@ pom.xml
 
 **用法1**
 
-在分模块的项目中，父级模块pom中的`dependencyManagement` 标签中需要导入另一个pom中的`dependencyManagement`的时候，必须同时使用`<scope>import</scope>`和`<type>pom</type>`。
+在分模块的项目中，父级模块pom中的`dependencyManagement`标签中需要导入另一个pom中的`dependencyManagement`的时候，必须同时使用`<scope>import</scope>`和`<type>pom</type>`。
 
 ```xml
     <!-- 依赖声明 -->
@@ -101,7 +101,7 @@ pom.xml
 
 在上面的pom中，父级pom，负责管理依赖的版本，其中父级pom想引入`spring-cloud-dependencies`的pom，从而能把spring-cloud的所以依赖引入进来。`spring-cloud-dependencies`也是一个父级pom，通过`dependencyManagement`管理了一系列依赖。这种情形就必须同时使用`<scope>import</scope> `和 `<type>pom</type>`。
 
- 这个时候，该pom中`dependencyManagement`就会包含导入的`spring-boot-dependencies`中的所有`dependencyManagement`。
+这个时候，该pom中`dependencyManagement`就会包含导入的`spring-boot-dependencies`中的所有`dependencyManagement`。
 
 这是为了解决pom类型的父工程单继承的问题，通过导入，可以导入各种其他父工程的`dependencyManagement`
 

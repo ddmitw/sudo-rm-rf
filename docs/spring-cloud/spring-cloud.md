@@ -80,7 +80,6 @@
 参考：
 
 1. [eureka如何应对高并发？](https://blog.csdn.net/Sunxn1991/article/details/108393582)；
-
 2. [Eureka支撑高并发、高性能的原理](https://whb1990.github.io/posts/2d8525f4.html);
 
 ##  3.分布式事务
