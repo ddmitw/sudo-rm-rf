@@ -43,3 +43,12 @@ public class OrderMqReceiver {
 2. [RabbitMQ：@RabbitListener 与 @RabbitHandler 及 消息序列化](https://www.jianshu.com/p/911d987b5f11)；
 3. [【MQ系列】RabbitListener消费基本使用姿势介绍](https://spring.hhui.top/spring-blog/2020/03/18/200318-SpringBoot%E7%B3%BB%E5%88%97%E6%95%99%E7%A8%8B%E4%B9%8BRabbitListener%E6%B6%88%E8%B4%B9%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8%E5%A7%BF%E5%8A%BF%E4%BB%8B%E7%BB%8D/)；
 
+
+## 2.send方法和convertAndSend方法的区别？
+
+区别之处在于，前者不会对消息进行转换，我们传递进去的是什么消息，就会往`RabbitMQ Server` 中发送什么消息；后者则会将我们传递进去的消息进行转换，具体如何转换的需要我们观察源码之后才会清楚，并将转换过后的消息发送到`RabbitMQ Server`中。
+
+## 3.AmqpTemplate和RabbitTemplate区别？
+
+AmqpTemplate是一个接口，而RabbitTemplate是AmqpTemplate的实现类。两个用哪个都可以，都对编码来说的最佳实践是使用接口，这样就不会对实现类硬性依赖。
+
