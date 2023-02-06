@@ -13,3 +13,4 @@
 * [Mybatis](/mybatis)
 * [NGINX](/nginx)
 * [GIT](/git)
+* [RabbitMQ](/rabbitmq)
