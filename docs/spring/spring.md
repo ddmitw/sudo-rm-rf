@@ -541,9 +541,9 @@ Advice是在方法执行之前或之后采取的实际操作。 这是在Spring 
 1. [Springboot（二十一）@Aspect 切面注解使用](https://blog.csdn.net/u012326462/article/details/82529835)；
 2. [Spring AOP - 注解方式使用介绍（长文详解）](https://juejin.cn/post/6844903987062243341)；
 
-### 11.5 Spring中的这几个注解有什么区别：@Component 、@Repository、@Service、@Controller？
+### 11.5 Spring中的这几个注解有什么区别：@Component、@Repository、@Service、@Controller？
 
-`@Component`用来告知Spring帮我们管理这个对象， 在需要时为我们注入此对象。`@Controller`，`@Repository`和 `@Service`注解都被 `@Component`修饰，用于代码中区分表现层，持久层和业务层的组件，代码中组件不好归类时可以使用 `@Component`来标注。
+`@Component`用来告知Spring帮我们管理这个对象，在需要时为我们注入此对象。`@Controller`、`@Repository`和`@Service`注解都被`@Component`修饰，用于代码中区分表现层，持久层和业务层的组件，代码中组件不好归类时可以使用`@Component`来标注。
 
 ### 11.6 `@Autowired`注解如何实现注入？
 
@@ -562,7 +562,7 @@ TODO
 
 **1）方法1**
 
-使用 `@Autowired`注解，并使用 `@Qualifier("beanId")`来指定注入哪一个实现类。
+使用`@Autowired`注解，并使用`@Qualifier("beanId")`来指定注入哪一个实现类。
 
 ```java
 public interface HumanService {
