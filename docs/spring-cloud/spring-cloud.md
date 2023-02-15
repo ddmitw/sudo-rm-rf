@@ -100,7 +100,7 @@ public class RuoYiGatewayApplication
 
 那么现在，我们的模式就是这样的了。
 
-![](../_media/spring-cloud/20230215095.png)
+![](../_media/spring-cloud/202302150953.png)
 
 但是，这个时候还会出现一些问题。
 
