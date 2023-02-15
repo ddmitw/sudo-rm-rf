@@ -134,31 +134,31 @@ public class RuoYiGatewayApplication
 
 结合中介理解：房东(提供者`Eureka Client Provider`)定期告诉中介(服务器`Eureka Server`)我的房子还租(续约)，中介(服务器`Eureka Server`)收到之后继续保留房屋的信息。
 
-**获取注册列表信息 Fetch Registries**： 
+**获取注册列表信息Fetch Registries**： 
 
-官方解释：`Eureka`客户端从服务器获取注册表信息，并将其缓存在本地。客户端会使用该信息查找其他服务，从而进行远程调用。该注册列表信息定期（每30秒钟）更新一次。每次返回注册列表信息可能与`Eureka` 客户端的缓存信息不同，`Eureka`客户端自动处理。如果由于某种原因导致注册列表信息不能及时匹配，`Eureka`客户端则会重新获取整个注册表信息。 `Eureka` 服务器缓存注册列表信息，整个注册表以及每个应用程序的信息进行了压缩，压缩内容和没有压缩的内容完全相同。`Eureka`客户端和`Eureka` 服务器可以使用JSON / XML格式进行通讯。在默认的情况下 `Eureka`客户端使用压缩`JSON`格式来获取注册列表的信息。
+官方解释：`Eureka`客户端从服务器获取注册表信息，并将其缓存在本地。客户端会使用该信息查找其他服务，从而进行远程调用。该注册列表信息定期（每30秒钟）更新一次。每次返回注册列表信息可能与`Eureka`客户端的缓存信息不同，`Eureka`客户端自动处理。如果由于某种原因导致注册列表信息不能及时匹配，`Eureka`客户端则会重新获取整个注册表信息。 `Eureka` 服务器缓存注册列表信息，整个注册表以及每个应用程序的信息进行了压缩，压缩内容和没有压缩的内容完全相同。`Eureka`客户端和`Eureka` 服务器可以使用JSON / XML格式进行通讯。在默认的情况下 `Eureka`客户端使用压缩`JSON`格式来获取注册列表的信息。
 
-结合中介理解：租客(消费者`Eureka Client Consumer`)去中介(服务器 `Eureka Server`)那里获取所有的房屋信息列表(客户端列表`Eureka Client List`)，而且租客为了获取最新的信息会定期向中介(服务器 `Eureka Server`)那里获取并更新本地列表。
+结合中介理解：租客(消费者`Eureka Client Consumer`)去中介(服务器`Eureka Server`)那里获取所有的房屋信息列表(客户端列表`Eureka Client List`)，而且租客为了获取最新的信息会定期向中介(服务器`Eureka Server`)那里获取并更新本地列表。
 
 **服务下线Cancel**：
 
 官方解释：Eureka客户端在程序关闭时向Eureka服务器发送取消请求。 发送请求后，该客户端实例信息将从服务器的实例注册表中删除。该下线请求不会自动完成，它需要调用以下内容：`DiscoveryManager.getInstance().shutdownComponent();`
 
-结合中介理解：房东 (提供者 `Eureka Client Provider`) 告诉中介  (服务器 `Eureka Server`) 我的房子不租了，中介之后就将注册的房屋信息从列表中剔除。
+结合中介理解：房东(提供者`Eureka Client Provider`) 告诉中介(服务器`Eureka Server`)我的房子不租了，中介之后就将注册的房屋信息从列表中剔除。
 
-**服务剔除 Eviction**：
+**服务剔除Eviction**：
 
 官方解释：在默认的情况下，**当Eureka客户端连续90秒(3个续约周期)没有向Eureka服务器发送服务续约，即心跳，Eureka服务器会将该服务实例从服务注册列表删除**，即服务剔除。
 
-结合中介理解：房东(提供者 `Eureka Client Provider`) 会定期联系 中介  (服务器 `Eureka Server`) 告诉他我的房子还租(续约)，如果中介  (服务器 `Eureka Server`) 长时间没收到提供者的信息，那么中介会将他的房屋信息给下架(服务剔除)。
+结合中介理解：房东(提供者 `Eureka Client Provider`) 会定期联系中介(服务器`Eureka Server`)告诉他我的房子还租(续约)，如果中介(服务器`Eureka Server`)长时间没收到提供者的信息，那么中介会将他的房屋信息给下架(服务剔除)。
 
-下面就是 `Netflix` 官方给出的 `Eureka` 架构图，你会发现和我们前面画的中介图别无二致。
+下面就是`Netflix`官方给出的`Eureka`架构图，你会发现和我们前面画的中介图别无二致。
 
 ![Eureka架构图](../_media/spring-cloud/202302150956.png)
 
-当然，可以充当服务发现的组件有很多：`Zookeeper` ，`Consul` ， `Eureka` 等。
+当然，可以充当服务发现的组件有很多：`Zookeeper` 、`Consul` 、`Eureka` 等。
 
-更多关于 `Eureka` 的知识(自我保护，初始注册策略等等)可以自己去官网查看，或者查看我的另一篇文章 [深入理解 Eureka](<https://juejin.im/post/5dd497e3f265da0ba7718018>)。
+更多关于`Eureka`的知识(自我保护，初始注册策略等等)可以自己去官网查看，或者查看我的另一篇文章[深入理解 Eureka](<https://juejin.im/post/5dd497e3f265da0ba7718018>)。
 
 
 
@@ -175,3 +175,74 @@ public class RuoYiGatewayApplication
 
 1. [深度解析springcloud分布式微服务的实现](http://ifeve.com/%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90springcloud%E5%88%86%E5%B8%83%E5%BC%8F%E5%BE%AE%E6%9C%8D%E5%8A%A1%E7%9A%84%E5%AE%9E%E7%8E%B0/) ；
 
+## 6.负载均衡之 Ribbon
+
+### 6.1 什么是`RestTemplate`?
+
+不是讲`Ribbon`么？怎么扯到了`RestTemplate`了？你先别急，听我慢慢道来。
+
+我不听我不听我不听:hear_no_evil::hear_no_evil::hear_no_evil:。
+
+我就说一句！**`RestTemplate`是`Spring`提供的一个访问Http服务的客户端类**，怎么说呢？就是微服务之间的调用是使用的`RestTemplate` 。比如这个时候我们消费者B需要调用提供者A所提供的服务我们就需要这么写。如我下面的伪代码。
+
+```java
+@Autowired
+private RestTemplate restTemplate;
+// 这里是提供者A的ip地址，但是如果使用了 Eureka 那么就应该是提供者A的名称
+private static final String SERVICE_PROVIDER_A = "http://localhost:8081";
+
+@PostMapping("/judge")
+public boolean judge(@RequestBody Request request) {
+    String url = SERVICE_PROVIDER_A + "/service1";
+    return restTemplate.postForObject(url, request, Boolean.class);
+}
+```
+ 如果你对源码感兴趣的话，你会发现上面我们所讲的`Eureka`框架中的**注册**、**续约**等，底层都是使用的`RestTemplate` 。
+
+### 6.2 为什么需要Ribbon？
+
+`Ribbon`是`Netflix`公司的一个开源的负载均衡项目，是一个客户端/进程内负载均衡器，**运行在消费者端**。
+
+我们再举个:chestnut:，比如我们设计了一个秒杀系统，但是为了整个系统的**高可用**，我们需要将这个系统做一个集群，而这个时候我们消费者就可以拥有多个秒杀系统的调用途径了，如下图。
+
+<img src="../_media/spring-cloud/202302151619.png" style="zoom:50%;" />
+
+如果这个时候我们没有进行一些**均衡操作** ，如果我们对`秒杀系统1`进行大量的调用，而另外两个基本不请求，就会导致`秒杀系统1` 崩溃，而另外两个就变成了傀儡，那么我们为什么还要做集群，我们高可用体现的意义又在哪呢？
+
+所以`Ribbon`出现了，注意我们上面加粗的几个字——**运行在消费者端**。指的是，`Ribbon`是运行在消费者端的负载均衡器，如下图。
+
+<img src="../_media/spring-cloud/202302151620.jpg" style="zoom:50%;" />
+
+其工作原理就是`Consumer`端获取到了所有的服务列表之后，在其**内部**使用**负载均衡算法**，进行对多个系统的调用。
+
+### 6.3 Nginx和Ribbon的对比
+
+提到**负载均衡**就不得不提到大名鼎鼎的`Nignx`了，而和`Ribbon`不同的是，它是一种**集中式**的负载均衡器。
+
+何为集中式呢？简单理解就是**将所有请求都集中起来，然后再进行负载均衡**。如下图。
+
+<img src="../_media/spring-cloud/202302151622.jpg" style="zoom:50%;" />
+
+我们可以看到`Nginx`是接收了所有的请求进行负载均衡的，而对于`Ribbon`来说它是在消费者端进行的负载均衡。如下图。
+
+<img src="../_media/spring-cloud/202302151624.jpg" style="zoom:50%;" />
+
+> 请注意`Request`的位置，在`Nginx`中请求是先进入负载均衡器，而在`Ribbon`中是先在客户端进行负载均衡才进行请求的。
+
+### 6.4 Ribbon的几种负载均衡算法
+
+负载均衡，不管`Nginx`还是`Ribbon`都需要其算法的支持，`Nginx`使用的是轮询和加权轮询算法。而在`Ribbon` 中有更多的负载均衡调度算法，其默认是使用的`RoundRobinRule`轮询策略。
+
+* **`RoundRobinRule`**：轮询策略。`Ribbon`默认采用的策略。若经过一轮轮询没有找到可用的`provider`，其最多轮询10 轮。若最终还没有找到，则返回`null`。
+* **`RandomRule`**: 随机策略，从所有可用的`provider`中随机选择一个。
+* **`RetryRule`**: 重试策略。先按照`RoundRobinRule`策略获取`provider`，若获取失败，则在指定的时限内重试。默认的时限为500毫秒。
+
+🐦🐦🐦 还有很多，这里不一一举:chestnut:了，你最需要知道的是默认轮询算法，并且可以更换默认的负载均衡算法，只需要在配置文件中做出修改就行。
+
+```yaml
+providerName:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+```
+
+当然，在`Ribbon`中你还可以**自定义负载均衡算法**，你只需要实现`IRule`接口，然后修改配置文件或者自定义`Java Config`类。
