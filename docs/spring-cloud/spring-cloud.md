@@ -197,7 +197,7 @@ public boolean judge(@RequestBody Request request) {
     return restTemplate.postForObject(url, request, Boolean.class);
 }
 ```
- 如果你对源码感兴趣的话，你会发现上面我们所讲的`Eureka`框架中的**注册**、**续约**等，底层都是使用的`RestTemplate` 。
+如果你对源码感兴趣的话，你会发现上面我们所讲的`Eureka`框架中的**注册**、**续约**等，底层都是使用的`RestTemplate` 。
 
 ### 6.2 为什么需要Ribbon？
 
