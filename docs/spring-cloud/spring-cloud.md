@@ -96,11 +96,11 @@ public class RuoYiGatewayApplication
 
 那怎么办呢？我们当然不会那么傻乎乎的，第一时间就是去找**中介**呀，它为我们提供了统一房源的地方，我们消费者只需要跑到它那里去找就行了。而对于房东来说，他们也只需要把房源在中介那里发布就行了。
 
-![](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-11/4d161e2950414113834f2f0a8fc2c16c-new-imaged17347a0-e653-4830-9542-3d7ae4305b2b.png)
+![](../_media/spring-cloud/202302150854.png)
 
 那么现在，我们的模式就是这样的了。
 
-![](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-11/24382ce6bbd44932ac38b1accade12d1-new-image2ff8affc-6f1d-49de-a8c3-801e7bad2b11.png)
+![](../_media/spring-cloud/20230215095.png)
 
 但是，这个时候还会出现一些问题。
 
@@ -110,7 +110,7 @@ public class RuoYiGatewayApplication
 
 针对上面的问题我们来重新构建一下上面的模式图
 
-![租房-中介模式图](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-11/租房-中介模式图.jpg)
+![租房-中介模式图](../_media/spring-cloud/202302150955.jpg)
 
 好了，举完这个:chestnut:我们就可以来看关于`Eureka`的一些基础概念了，你会发现这东西理解起来怎么这么简单。:punch::punch::punch:
 
@@ -154,7 +154,7 @@ public class RuoYiGatewayApplication
 
 下面就是 `Netflix` 官方给出的 `Eureka` 架构图，你会发现和我们前面画的中介图别无二致。
 
-![Eureka架构图](https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-11/5d723c49eca1468ab7b89af06743023c-new-imageb8aa3d41-fad4-4b38-add9-c304930ab285.png)
+![Eureka架构图](../_media/spring-cloud/202302150956.png)
 
 当然，可以充当服务发现的组件有很多：`Zookeeper` ，`Consul` ， `Eureka` 等。
 
