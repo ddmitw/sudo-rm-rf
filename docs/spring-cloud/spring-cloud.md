@@ -246,3 +246,56 @@ providerName:
 ```
 
 当然，在`Ribbon`中你还可以**自定义负载均衡算法**，你只需要实现`IRule`接口，然后修改配置文件或者自定义`Java Config`类。
+
+## 7.什么是Open Feign
+
+有了`Eureka`、`RestTemplate` 、`Ribbon`，我们就可以愉快地进行服务间的调用了，但是使用`RestTemplate`还是不方便，我们每次都要进行这样的调用。
+
+```java
+@Autowired
+private RestTemplate restTemplate;
+// 这里是提供者A的ip地址，但是如果使用了 Eureka 那么就应该是提供者A的名称
+private static final String SERVICE_PROVIDER_A = "http://localhost:8081";
+
+@PostMapping("/judge")
+public boolean judge(@RequestBody Request request) {
+    String url = SERVICE_PROVIDER_A + "/service1";
+    // 是不是太麻烦了？？？每次都要 url、请求、返回类型的 
+    return restTemplate.postForObject(url, request, Boolean.class);
+}
+```
+
+这样每次都调用`RestRemplate`的`API`是否太麻烦，我能不能像**调用原来代码一样进行各个服务间的调用呢？**
+
+:bulb::bulb::bulb:聪明的小朋友肯定想到了，那就用**映射**呀，就像域名和IP地址的映射。我们可以将被调用的服务代码映射到消费者端，这样我们就可以**“无缝开发”**啦。
+
+>  `OpenFeign`也是运行在消费者端的，使用`Ribbon`进行负载均衡，所以`OpenFeign`直接内置了`Ribbon`。
+
+在导入了`Open Feign`之后我们就可以进行愉快编写`Consumer`端代码了。
+
+```java
+// 使用 @FeignClient 注解来指定提供者的名字
+@FeignClient(value = "eureka-client-provider")
+public interface TestClient {
+    // 这里一定要注意需要使用的是提供者那端的请求相对路径，这里就相当于映射了
+    @RequestMapping(value = "/provider/xxx",
+    method = RequestMethod.POST)
+    CommonResponse<List<Plan>> getPlans(@RequestBody planGetRequest request);
+}
+```
+
+然后我们在`Controller`就可以像原来调用`Service`层代码一样调用它了。
+
+```java
+@RestController
+public class TestController {
+    // 这里就相当于原来自动注入的 Service
+    @Autowired
+    private TestClient testClient;
+    // controller 调用 service 层代码
+    @RequestMapping(value = "/test", method = RequestMethod.POST)
+    public CommonResponse<List<Plan>> get(@RequestBody planGetRequest request) {
+        return testClient.getPlans(request);
+    }
+}
+```
