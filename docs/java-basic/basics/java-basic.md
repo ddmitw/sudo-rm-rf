@@ -405,7 +405,7 @@ TreeMap是按key排序的，元素在插入TreeSet时compareTo()方法要被调�
 
 ## 3.线程
 
-### 3.1多线程的实现方式有几种？不同实现方式之间有什么区别？
+### 3.1 多线程的实现方式有几种？不同实现方式之间有什么区别？
 
 主要有两种：
 
@@ -543,7 +543,7 @@ public class ThreadDemo03 {
 ```
 
 
-#### 3.1.4 获取线程线程返回结果(通过Callable和FutureTask创建线程)
+#### 3.1.4 获取线程返回结果(通过Callable和FutureTask创建线程)
 
 `FutureTask`本质上是`Runnable`的实现类，它可以接受一个回调作为参数。
 
