@@ -75,3 +75,5 @@ http {
 ```
 
 上面upstream定义了一组服务器，他们可以是不同的端口。
+
+参考：[理解nginx代理和反向代理，盘点nginx负载均衡的5种策略](https://www.4spaces.org/1094.html)。
